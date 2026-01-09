@@ -2,13 +2,14 @@ package dev.iraelie.e_commerce_backend.service.product;
 
 import dev.iraelie.e_commerce_backend.model.Product;
 import dev.iraelie.e_commerce_backend.request.AddProductRequest;
+import dev.iraelie.e_commerce_backend.request.ProductUpdateRequest;
 
 import java.util.List;
 
 public interface IProductService {
     Product addProduct(AddProductRequest product);
     void deleteProductById(Long id);
-    Product updateProduct(Product product, Long id);
+    Product updateProduct(ProductUpdateRequest product, Long id);
     List<Product> getAllProducts();
     Product getProductById(Long id);
     List<Product> getProductsByName(String name);

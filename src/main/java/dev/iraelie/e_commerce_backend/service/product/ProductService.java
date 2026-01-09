@@ -6,6 +6,7 @@ import dev.iraelie.e_commerce_backend.model.Product;
 import dev.iraelie.e_commerce_backend.repository.CategoryRepository;
 import dev.iraelie.e_commerce_backend.repository.ProductRepository;
 import dev.iraelie.e_commerce_backend.request.AddProductRequest;
+import dev.iraelie.e_commerce_backend.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +53,24 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Product updateProduct(Product product, Long id) {
-        return null;
+    public Product updateProduct(ProductUpdateRequest product, Long id) {
+        return productRepository.findById(id)
+                .map(existingProduct -> updateExistingProduct(existingProduct, product))
+                .map(productRepository :: save)
+                .orElseThrow(()-> new ResourceNotFoundException("Product not found!"));
+    }
+
+    private Product updateExistingProduct(Product existingProduct, ProductUpdateRequest request) {
+        existingProduct.setName(request.getName());
+        existingProduct.setBrand(request.getBrand());
+        existingProduct.setPrice(request.getPrice());
+        existingProduct.setInventory(request.getInventory());
+        existingProduct.setDescription(request.getDescription());
+
+        Category category = categoryRepository.findByName(request.getCategory().getName());
+        existingProduct.setCategory(category);
+        return  existingProduct;
+
     }
 
     @Override
