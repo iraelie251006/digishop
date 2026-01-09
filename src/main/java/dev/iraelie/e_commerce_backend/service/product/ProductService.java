@@ -1,22 +1,44 @@
 package dev.iraelie.e_commerce_backend.service.product;
 
 import dev.iraelie.e_commerce_backend.exceptions.ResourceNotFoundException;
+import dev.iraelie.e_commerce_backend.model.Category;
 import dev.iraelie.e_commerce_backend.model.Product;
+import dev.iraelie.e_commerce_backend.repository.CategoryRepository;
 import dev.iraelie.e_commerce_backend.repository.ProductRepository;
+import dev.iraelie.e_commerce_backend.request.AddProductRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProductService implements IProductService{
 
     private final ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
 
     @Override
-    public Product addProduct(Product product) {
-        return null;
+    public Product addProduct(AddProductRequest product) {
+        Category category = Optional.ofNullable(categoryRepository.findByName(product.getCategory().getName()))
+                .orElseGet(() -> {
+                    Category newCategory = new Category(product.getCategory().getName());
+                    return categoryRepository.save(newCategory);
+                });
+        product.setCategory(category);
+        return productRepository.save(createProduct(product, category));
+    }
+
+    private Product createProduct(AddProductRequest productRequest, Category category) {
+        return new Product(
+                productRequest.getName(),
+                productRequest.getPrice(),
+                productRequest.getBrand(),
+                productRequest.getInventory(),
+                productRequest.getDescription(),
+                category
+        );
     }
 
     @Override

@@ -20,4 +20,8 @@ public class Category {
     @OneToMany
     @JoinColumn(name = "productId")
     private List<Product> products;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }
