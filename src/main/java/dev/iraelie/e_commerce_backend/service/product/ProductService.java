@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ProductService implements IProductService{
 
     private final ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public Product addProduct(AddProductRequest product) {
