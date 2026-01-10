@@ -1,5 +1,6 @@
 package dev.iraelie.e_commerce_backend.service.category;
 
+import dev.iraelie.e_commerce_backend.exceptions.ResourceNotFoundException;
 import dev.iraelie.e_commerce_backend.model.Category;
 import dev.iraelie.e_commerce_backend.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,8 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public Category getCategoryById(Long id) {
-        return null;
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
     }
 
     @Override
