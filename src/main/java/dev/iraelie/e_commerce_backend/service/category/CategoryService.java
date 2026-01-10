@@ -36,7 +36,7 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public Category updateCategory(Category category) {
+    public Category updateCategory(Category category, Long id) {
         return null;
     }
 
