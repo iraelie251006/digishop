@@ -1,10 +1,18 @@
 package dev.iraelie.e_commerce_backend.service.category;
 
 import dev.iraelie.e_commerce_backend.model.Category;
+import dev.iraelie.e_commerce_backend.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class CategoryService implements ICategoryService{
+
+    private final CategoryRepository categoryRepository;
+
     @Override
     public Category getCategoryById(Long id) {
         return null;
