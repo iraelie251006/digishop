@@ -2,6 +2,7 @@ package dev.iraelie.e_commerce_backend.service.image;
 
 import dev.iraelie.e_commerce_backend.model.Image;
 import dev.iraelie.e_commerce_backend.repository.ImageRepository;
+import dev.iraelie.e_commerce_backend.service.product.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageService implements IImageService{
 
     private final ImageRepository imageRepository;
+    private IProductService productService;
 
     @Override
     public Image getImageById(Long id) {
