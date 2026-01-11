@@ -1,5 +1,6 @@
 package dev.iraelie.e_commerce_backend.service.category;
 
+import dev.iraelie.e_commerce_backend.exceptions.AlreadyExistsException;
 import dev.iraelie.e_commerce_backend.exceptions.ResourceNotFoundException;
 import dev.iraelie.e_commerce_backend.model.Category;
 import dev.iraelie.e_commerce_backend.repository.CategoryRepository;
@@ -33,7 +34,14 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public Category addCategory(Category category) {
-        return null;
+        return Optional.of(category)
+                .filter(
+                        c -> !categoryRepository.existsByName(c.getName())
+                )
+                .map(categoryRepository::save)
+                .orElseThrow(
+                        () -> new AlreadyExistsException(category.getName() + " already exists")
+                );
     }
 
     @Override
