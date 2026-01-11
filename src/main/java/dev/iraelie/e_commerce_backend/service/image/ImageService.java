@@ -25,7 +25,13 @@ public class ImageService implements IImageService{
 
     @Override
     public void deleteImageById(Long id) {
-
+        imageRepository.findById(id)
+                .ifPresentOrElse(
+                        imageRepository::delete,
+                        () -> {
+                            throw new ResourceNotFoundException("Image resource with id: " + id);
+                        }
+                        );
     }
 
     @Override
