@@ -1,5 +1,6 @@
 package dev.iraelie.e_commerce_backend.service.image;
 
+import dev.iraelie.e_commerce_backend.exceptions.ResourceNotFoundException;
 import dev.iraelie.e_commerce_backend.model.Image;
 import dev.iraelie.e_commerce_backend.repository.ImageRepository;
 import dev.iraelie.e_commerce_backend.service.product.IProductService;
@@ -16,7 +17,10 @@ public class ImageService implements IImageService{
 
     @Override
     public Image getImageById(Long id) {
-        return null;
+        return imageRepository.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Image resource with id: " + id)
+                );
     }
 
     @Override
