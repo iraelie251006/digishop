@@ -3,9 +3,11 @@ package dev.iraelie.e_commerce_backend.service.image;
 import dev.iraelie.e_commerce_backend.model.Image;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface IImageService {
     Image getImageById(Long id);
     void deleteImageById(Long id);
-    Image saveImage(MultipartFile file, Long productId);
+    Image saveImage(List<MultipartFile> files, Long productId);
     void updateImage(MultipartFile file, Long imageId);
 }

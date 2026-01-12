@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class ImageService implements IImageService{
     }
 
     @Override
-    public Image saveImage(MultipartFile file, Long productId) {
+    public Image saveImage(List<MultipartFile> files, Long productId) {
         return null;
     }
 
