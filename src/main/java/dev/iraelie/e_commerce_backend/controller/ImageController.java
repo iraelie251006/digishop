@@ -1,6 +1,7 @@
 package dev.iraelie.e_commerce_backend.controller;
 
 import dev.iraelie.e_commerce_backend.dto.ImageDto;
+import dev.iraelie.e_commerce_backend.response.ApiResponse;
 import dev.iraelie.e_commerce_backend.service.image.IImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
